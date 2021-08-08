@@ -8,13 +8,15 @@ const server = app.listen(port, () => console.log("Server Listening on " + port)
 
 app.get("/", async (req, res, next) => {
 
-    let string = req.query.value;  // Get the value of the string from the GET request
+    let string = req.query.data;  // Get the value of the string from the GET request
 
     if(string === undefined || string == null || string == "") { return res.sendStatus(400); }  // Bad Request if string not mentioned
 
     let width = req.query.size || 200;  // Get the value of the width from the GET request. Value = 200 if not defined.
 
-    await QRCode.toDataURL(string , { width: width, margin: '2' }, function (err, url) {  // Creates the data url of the generated QR
+    let errorCorrectionLevel = req.query.ec || 'L';  // Get the value of the errorCorrectionLevel from the GET request. Value = 'L' if not defined.
+
+    await QRCode.toDataURL(string , { width: width, margin: '2', errorCorrectionLevel: errorCorrectionLevel }, function (err, url) {  // Creates the data url of the generated QR
         
         var img = Buffer.from(url.split(',')[1], 'base64');  // Creates a buffer of the data url
 
