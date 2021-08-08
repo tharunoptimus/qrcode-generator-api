@@ -18,7 +18,7 @@
 
 ## Example
 - In the development server load this URL to get the QR Code
-    [`localhost:3003/?value=meowman&size=100`](localhost:3003/?data=meowman&size=100)
+    [`localhost:3003/?data=meowman&size=100`](localhost:3003/?data=meowman&size=100)
 - The Query Parameters
     - `data`: The string to generate
     - `size`: The size of the QR code (optional - default is 200px)
